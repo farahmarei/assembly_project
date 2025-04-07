@@ -1,0 +1,17 @@
+Line   Address   Machine Code    Source
+-----------------------------------------------------
+   1                          .org 0x0000
+   2                          .text
+   3   0x0000                  main:
+   4   0x0000   01B9             li a0, 0              # Load immediate 0 into register a0
+   5   0x0002   0A39             li t0, 5              # Load immediate 5 into register t0
+   6   0x0004   2192             bz a0, else           # Branch to 'else' if a0 == 0 (which it is, so it will branch)
+   7   0x0006                  
+   8   0x0006   000F             ecall 1               # This won't be executed because of the branch to 'else'
+   9   0x0008                  label1:
+  10   0x0008   0001             addi t0, t0, -5       # This won't be executed because of the branch to 'else'
+  11   0x000A                  
+  12   0x000A                  else:
+  13   0x000A   0401             addi t0, 2            # Add 2 to t0 (t0 becomes 5 + 2 = 7)
+  14   0x000C   000F             ecall 1               # Invoke system call 1 (prints the value of a0, which is still 0)
+  15   0x000E   001F             ecall 3               # Invoke system call 3 (terminate the program)

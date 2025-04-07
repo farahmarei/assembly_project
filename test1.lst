@@ -1,0 +1,15 @@
+Line   Address   Machine Code    Source
+-----------------------------------------------------
+   1                          .org 0x0000
+   2                          .text
+   3   0x0000                  start:
+   4   0x0000   0BB9            li   a0, 5          ; load 5 into a0
+   5   0x0002   0BF9            li   a1, 5          ; load 5 into a1
+   6   0x0004   2F82            beq  a0, a1, equal  ; branch if a0 == a1
+   7   0x0006   1439            li   t0, 10         ; if not equal, set t0 to 10
+   8   0x0008   0105            j    end            ; Jump to end
+   9   0x000A                  equal:
+  10   0x000A   29B9            li   a0, 20         ; If equal, set a0 to 20
+  11   0x000C                  end:
+  12   0x000C   000F            ecall 1             ; ECALL 1: Print the result (expected output: 20)
+  13   0x000E   001F            ecall 3             ; ECALL 3: Terminate the program

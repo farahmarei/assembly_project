@@ -1,0 +1,18 @@
+Line   Address   Machine Code    Source
+-----------------------------------------------------
+   1                              .org 0x0000
+   2                              .text
+   3   0x0000                  start:
+   4   0x0000   03B9             li   a0, 1          ; Initialize product = 1
+   5   0x0002   03F9             li   a1, 1          ; Initialize counter = 1
+   6   0x0004   0D79             li   t1, 6          ; Limit = 6 (loop until counter equals 6)
+   7   0x0006                  
+   8   0x0006                  loop:
+   9   0x0006   0D80             add  a0, a0, a0     ; Double the product (product = product * 2)
+  10   0x0008   0D80             add  a0, a0, a1     ; Add the counter to the product (this is like product = product + counter)
+  11   0x000A   01C1             addi a1, a1, 1      ; Increment counter
+  12   0x000C   CBCA             bne  a1, t1, loop   ; If counter != 6, continue looping
+  13   0x000E                  
+  14   0x000E                  done:
+  15   0x000E   000F             ecall 1             ; ecall 1: Print the integer in a0 (expected output: 120)
+  16   0x0010   001F             ecall 3             ; ecall 3: Terminate the program
